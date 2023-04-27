@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Product extends Model
+class Service extends Model
 {
     use HasFactory, SoftDeletes;
 
@@ -17,14 +17,14 @@ class Product extends Model
         'description',
         'active',
         'base_price',
-        'product_type_id'
+        'service_type_id'
     ];
 
 
     # region relations
-    public function productTypes(): BelongsTo
+    public function serviceTypes(): BelongsTo
     {
-        return $this->belongsTo(ProductType::class);
+        return $this->belongsTo(ServiceType::class);
     }
 
     public function orders(): BelongsToMany
@@ -32,5 +32,4 @@ class Product extends Model
         return $this->belongsToMany(Order::class);
     }
     # endregion
-
 }

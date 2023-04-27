@@ -3,6 +3,8 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use \App\Enums\OrderStatusEnum;
+use \App\Enums\OrderTypeEnum;
 
 return new class extends Migration
 {
@@ -11,13 +13,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('description');
-            $table->boolean('active')->default(true);
-            $table->unsignedDouble('base_price')->default(0);
-            $table->foreignId('product_type_id');
+            $table->foreignId('user_id');
+            $table->enum('type', OrderTypeEnum::values());
+            $table->enum('status', OrderStatusEnum::values());
+            $table->unsignedDouble('price')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('orders');
     }
 };

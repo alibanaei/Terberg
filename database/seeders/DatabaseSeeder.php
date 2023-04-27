@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Service;
+use App\Models\ServiceType;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -16,6 +18,9 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             ProductTypeSeeder::class,
             ProductSeeder::class,
+            ServiceTypeSeeder::class,
+            ServiceSeeder::class,
+            OptionSeeder::class,
         ]);
     }
 }
