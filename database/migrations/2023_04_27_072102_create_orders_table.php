@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('user_id');
             $table->enum('type', OrderTypeEnum::values());
             $table->enum('status', OrderStatusEnum::values());
-            $table->unsignedDouble('price')->default(0);
+            $table->unsignedDouble('cost')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

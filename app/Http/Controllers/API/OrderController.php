@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Actions\FactoryActions\ResourceFactory;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\API\OrderRequest;
+use App\Http\Requests\API\StoreOrderRequest;
+use App\Http\Resources\OrderResource;
+use App\Http\Responses\APIResponse;
 
 class OrderController extends Controller
 {
@@ -26,9 +29,12 @@ class OrderController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(OrderRequest $request)
+    public function store(StoreOrderRequest $request, ResourceFactory $resourceFactory)
     {
-        //
+        $data = $request->all();
+        $order = $resourceFactory->createResource($data);
+        $orderResource = new OrderResource($order);
+        return APIResponse::makeSuccess($orderResource);
     }
 
     /**
@@ -50,7 +56,7 @@ class OrderController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(OrderRequest $request, string $id)
+    public function update(StoreOrderRequest $request, string $id)
     {
         //
     }

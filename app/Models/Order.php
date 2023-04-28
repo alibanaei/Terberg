@@ -7,16 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Traits\OrderCostHelper;
 
 class Order extends Model
 {
-    use HasFactory, SoftDeletes;
-
-    protected $fillable = [
-        'user_id',
-        'type',
-        'price'
-    ];
+    use HasFactory, SoftDeletes, OrderCostHelper;
 
 
     # region relations
@@ -37,7 +32,7 @@ class Order extends Model
 
     public function options(): BelongsToMany
     {
-        return $this->belongsToMany(Option::class);
+        return $this->belongsToMany(Option::class, 'order_option');
     }
     # endregion
 }

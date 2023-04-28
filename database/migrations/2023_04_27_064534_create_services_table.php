@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('description');
             $table->boolean('active')->default(true);
-            $table->unsignedDouble('base_price')->default(0);
+            $table->unsignedDouble('price')->default(0);
             $table->foreignId('service_type_id');
             $table->timestamps();
             $table->softDeletes();

@@ -4,7 +4,7 @@ namespace App\Http\Requests\API;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ServiceRequest extends FormRequest
+class UpdateProductRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,7 +22,10 @@ class ServiceRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'min:3',
+            'description' => 'min:10',
+            'price' => 'numeric',
+            'product_type_id' => 'exists:product_types,id'
         ];
     }
 }

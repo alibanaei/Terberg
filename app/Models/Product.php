@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\ScopeHelper;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -10,19 +11,19 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, ScopeHelper;
 
     protected $fillable = [
         'name',
         'description',
         'active',
-        'base_price',
+        'price',
         'product_type_id'
     ];
 
 
     # region relations
-    public function productTypes(): BelongsTo
+    public function productType(): BelongsTo
     {
         return $this->belongsTo(ProductType::class);
     }
