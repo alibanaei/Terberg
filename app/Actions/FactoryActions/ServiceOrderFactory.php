@@ -6,13 +6,13 @@ use App\Enums\OrderTypeEnum;
 
 class ServiceOrderFactory extends DiverseOrderFactory
 {
-    function addOrderItems()
+    function addOrderItems(): void
     {
         $serviceIds = $this->data['serviceIds'];
         $this->order->services()->sync($serviceIds);
     }
 
-    function determineOrderType()
+    function determineOrderType(): void
     {
         $this->order->type = OrderTypeEnum::Service->value;
     }

@@ -17,9 +17,9 @@ abstract class DiverseOrderFactory implements ResourceFactory
         $this->order = new Order();
     }
 
-    abstract function addOrderItems();
+    abstract function addOrderItems(): void;
 
-    abstract function determineOrderType();
+    abstract function determineOrderType(): void;
 
     public function createResource(array $data): Order
     {
@@ -40,7 +40,7 @@ abstract class DiverseOrderFactory implements ResourceFactory
         return $this->order;
     }
 
-    private function createOrder()
+    private function createOrder(): void
     {
         $this->order->user_id = Auth::id();
         $this->order->status = OrderStatusEnum::Initialized->value;
@@ -49,18 +49,18 @@ abstract class DiverseOrderFactory implements ResourceFactory
         $this->order->save();
     }
 
-    private function addOrderOptions()
+    private function addOrderOptions(): void
     {
         $optionIds = $this->data['optionIds'] ?? [];
         $this->order->options()->sync($optionIds);
     }
 
-    private function calculateOrderCost()
+    private function calculateOrderCost(): void
     {
         $this->order->cost = $this->order->calculateOrderCost();
     }
 
-    private function updateOrderStatus()
+    private function updateOrderStatus(): void
     {
         $this->order->status = OrderStatusEnum::Pending->value;
     }
