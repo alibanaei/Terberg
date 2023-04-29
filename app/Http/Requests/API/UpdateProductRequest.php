@@ -24,7 +24,7 @@ class UpdateProductRequest extends FormRequest
         return [
             'name' => 'min:3',
             'description' => 'min:10',
-            'price' => 'numeric',
+            'price' => 'numeric|regex:/^\d*(\.\d+)?$/|min:0',
             'product_type_id' => 'exists:product_types,id'
         ];
     }

@@ -22,27 +22,19 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->when(OrderController::class)
             ->needs(ResourceFactory::class)
-            ->give(function () {
-                return OrderFactory::class;
-            });
+            ->give(OrderFactory::class);
 
         $this->app->when(ProductController::class)
             ->needs(ResourceFactory::class)
-            ->give(function () {
-                return ProductFactory::class;
-            });
+            ->give(ProductFactory::class);
 
-        $this->app->when([ServiceController::class])
+        $this->app->when(ServiceController::class)
             ->needs(ResourceFactory::class)
-            ->give(function () {
-                return ServiceFactory::class;
-            });
+            ->give(ServiceFactory::class);
 
-        $this->app->when([OptionController::class])
+        $this->app->when(OptionController::class)
             ->needs(ResourceFactory::class)
-            ->give(function () {
-                return OptionFactory::class;
-            });
+            ->give(OptionFactory::class);
     }
 
     /**

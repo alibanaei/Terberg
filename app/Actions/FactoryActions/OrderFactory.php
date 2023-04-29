@@ -70,7 +70,7 @@ class OrderFactory implements ResourceFactory
 
     private function addOrderOptions()
     {
-        $optionIds = $this->data['optionIds'];
+        $optionIds = $this->data['optionIds'] ?? [];
         $this->order->options()->sync($optionIds);
     }
 

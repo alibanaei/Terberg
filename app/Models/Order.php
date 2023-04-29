@@ -14,6 +14,10 @@ class Order extends Model
     use HasFactory, SoftDeletes, OrderCostHelper;
 
 
+    protected $casts = [
+        'type' => 'int'
+    ];
+
     # region relations
     public function user(): BelongsTo
     {

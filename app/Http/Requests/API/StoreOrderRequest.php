@@ -46,6 +46,12 @@ class StoreOrderRequest extends FormRequest
                     return $query->where('active', true);
                 }),
             ],
+            'optionIds' => 'array',
+            'optionIds.*' => [
+                Rule::exists('options', 'id')->where(function (Builder $query) {
+                    return $query->where('active', true);
+                }),
+            ],
         ];
     }
 }

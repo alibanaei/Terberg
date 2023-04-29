@@ -13,39 +13,19 @@ use Illuminate\Http\Request;
 
 class ServiceController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index(Request $request)
     {
-        $perPage = $request->get('per_page') ?? 10;
-
-        $items = Service::active()->paginate($perPage);
-
-        $services = $items->items();
-
-        $links = [
-            'page' => $items->currentpage(),
-            'total' => $items->total(),
-            'perPage' => $items->perPage(),
-        ];
-
-        $services = new ServiceCollection($services);
-
-        return APIResponse::makeSuccess(compact('services', 'links'));
+        //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
     public function store(StoreServiceRequest $request, ResourceFactory $resourceFactory)
     {
         $data = $request->all();
@@ -54,33 +34,25 @@ class ServiceController extends Controller
         return APIResponse::makeSuccess($serviceResource);
     }
 
-    /**
-     * Display the specified resource.
-     */
+
     public function show(Service $service)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+
     public function edit(Service $service)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+
     public function update(StoreServiceRequest $request, Service $service)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
     public function destroy(Service $service)
     {
         //

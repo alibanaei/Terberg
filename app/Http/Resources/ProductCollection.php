@@ -14,8 +14,6 @@ class ProductCollection extends ResourceCollection
      */
     public function toArray(Request $request): array
     {
-        return [
-            $this->collection
-        ];
+        return parent::toArray($request);
     }
 }

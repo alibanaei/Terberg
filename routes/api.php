@@ -24,10 +24,18 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     Route::apiResource('order', OrderController::class);
 
-    Route::apiResource('product', ProductController::class);
 
-    Route::apiResource('service', ServiceController::class);
+    Route::group(['middleware' => ['role:admin']], function () {
 
-    Route::apiResource('option', OptionController::class);
+        Route::post('/product', [ProductController::class, 'store'])->name('product.store');
+
+        Route::put('/product/{product}', [ProductController::class, 'update'])->name('product.update');
+
+        Route::delete('/product/{product}', [ProductController::class, 'destroy'])->name('product.destroy');
+    });
 
 });
+
+Route::get('/product', [ProductController::class, 'index'])->name('product.index');
+
+Route::get('/product/{product}', [ProductController::class, 'show'])->name('product.show');
