@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Actions\FactoryActions;
+namespace App\Services\FactoryService\Implementations;
 
+use App\Services\FactoryService\AbstractClasses\DiverseOrderFactoryService;
 use App\Enums\OrderTypeEnum;
 
-class ProductOrderFactory extends DiverseOrderFactory
+class ProductOrderFactory extends DiverseOrderFactoryService
 {
     function addOrderItems(): void
     {

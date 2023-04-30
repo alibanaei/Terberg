@@ -1,12 +1,14 @@
 <?php
 
-namespace App\Actions\FactoryActions;
+namespace App\Services\FactoryService\AbstractClasses;
 
+
+use App\Services\FactoryService\Interfaces\ResourceFactoryService;
 use App\Enums\OrderStatusEnum;
 use App\Models\Order;
 use Illuminate\Support\Facades\Auth;
 
-abstract class DiverseOrderFactory implements ResourceFactory
+abstract class DiverseOrderFactoryService implements ResourceFactoryService
 {
     protected Order $order;
 

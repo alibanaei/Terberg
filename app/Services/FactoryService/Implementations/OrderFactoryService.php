@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Actions\FactoryActions;
-use App\Enums\OrderStatusEnum;
+namespace App\Services\FactoryService\Implementations;
+
+use App\Services\FactoryService\Interfaces\ResourceFactoryService;
 use App\Enums\OrderTypeEnum;
 use App\Models\Order;
-use Illuminate\Support\Facades\Auth;
 
-class OrderFactory implements ResourceFactory
+class OrderFactoryService implements ResourceFactoryService
 {
 
     public function createResource(array $data): Order

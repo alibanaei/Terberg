@@ -2,39 +2,27 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Actions\FactoryActions\ResourceFactory;
+use App\Services\RepositoryService\Interfaces\RepositoryService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\API\StoreOrderRequest;
 use App\Http\Resources\OrderCollection;
 use App\Http\Resources\OrderResource;
-use App\Models\Order;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use \Illuminate\Http\JsonResponse;
 
 class OrderController extends Controller
 {
 
-    private ResourceFactory $resourceFactory;
+    private RepositoryService $repositoryService;
 
-    public function __construct(ResourceFactory $resourceFactory)
+    public function __construct(RepositoryService $repositoryService)
     {
-        $this->resourceFactory = $resourceFactory;
+        $this->repositoryService = $repositoryService;
     }
 
     public function index(Request $request): JsonResponse
     {
-        $perPage = $request->get('per_page') ?? 10;
-
-        $items = Order::where('user_id', Auth::id())->paginate($perPage);
-
-        $orders = $items->items();
-
-        $links = [
-            'page' => $items->currentpage(),
-            'total' => $items->total(),
-            'perPage' => $items->perPage(),
-        ];
+        [$orders, $links] = $this->repositoryService->index($request->all());
 
         $orders = new OrderCollection($orders);
 
@@ -43,11 +31,7 @@ class OrderController extends Controller
 
     public function show(string $id): JsonResponse
     {
-        $order = Order::findOrFail($id);
-
-        if($order->user_id != Auth::id()) {
-            abort(403);
-        }
+        $order = $this->repositoryService->show($id);
 
         return response()->json(compact('order'));
     }
@@ -55,7 +39,7 @@ class OrderController extends Controller
     public function store(StoreOrderRequest $request): JsonResponse
     {
         $data = $request->all();
-        $order = $this->resourceFactory->createResource($data);
+        $order = $this->repositoryService->store($data);
         $order = new OrderResource($order);
         return response()->json(compact('order'));
     }

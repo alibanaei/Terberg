@@ -2,12 +2,9 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Actions\FactoryActions\ResourceFactory;
+use App\Services\FactoryService\Interfaces\ResourceFactoryService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\API\StoreServiceRequest;
-use App\Http\Resources\ServiceCollection;
-use App\Http\Resources\ServiceResource;
-use App\Http\Responses\APIResponse;
 use App\Models\Service;
 use Illuminate\Http\Request;
 
@@ -26,12 +23,9 @@ class ServiceController extends Controller
     }
 
 
-    public function store(StoreServiceRequest $request, ResourceFactory $resourceFactory)
+    public function store(StoreServiceRequest $request, ResourceFactoryService $resourceFactory)
     {
-        $data = $request->all();
-        $service = $resourceFactory->createResource($data);
-        $serviceResource = new ServiceResource($service);
-        return APIResponse::makeSuccess($serviceResource);
+        //
     }
 
 
