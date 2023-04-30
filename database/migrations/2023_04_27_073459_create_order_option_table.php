@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Option;
+use App\Models\Order;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('order_option', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('order_id');
-            $table->foreignId('option_id');
+            $table->foreignIdFor(Order::class, 'order_id');
+            $table->foreignIdFor(Option::class, 'option_id');
             $table->timestamps();
         });
     }

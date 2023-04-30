@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Service;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,7 +18,7 @@ return new class extends Migration
             $table->string('description');
             $table->boolean('active')->default(true);
             $table->unsignedDouble('price')->default(0);
-            $table->foreignId('service_type_id');
+            $table->foreignIdFor(Service::class, 'service_type_id');
             $table->timestamps();
             $table->softDeletes();
         });
